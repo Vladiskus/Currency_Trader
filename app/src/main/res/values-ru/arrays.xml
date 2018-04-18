@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="filter_array_4">
+        <item name="period_all_time">За всё время</item>
+        <item name="period_last_week">За неделю</item>
+        <item name="period_last_month">За месяц</item>
+        <item name="period_select">Произвольный период</item>
+    </string-array>
+
+    <string-array name="filter_array_5">
+        <item name="period_all_time">За всё время</item>
+        <item name="period_last_week">За неделю</item>
+        <item name="period_last_month">За месяц</item>
+        <item name="period_select">Произвольный период</item>
+        <item name="period_select">Изменить произвольный период</item>
+    </string-array>
+
+    <string-array name="period_array">
+        <item name="week">За неделю</item>
+        <item name="two_weeks">За две недели</item>
+        <item name="month">За месяц</item>
+    </string-array>
+</resources>

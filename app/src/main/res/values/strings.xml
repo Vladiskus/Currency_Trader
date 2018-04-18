@@ -1,0 +1,36 @@
+<resources>
+    <string name="app_name">Currency Trader</string>
+
+    <string name="title_exchange">Exchange</string>
+    <string name="title_selection">Currency selection</string>
+    <string name="title_filter">Filter selection</string>
+    <string name="title_history">History</string>
+    <string name="title_analytics">Analytics</string>
+
+    <string name="button_try_again">Try again</string>
+    <string name="button_exchange">Exchange</string>
+    <string name="button_accept">Accept</string>
+
+    <string name="text_from">Your amount</string>
+    <string name="text_to">You will get</string>
+    <string name="text_no_used_currency">You didn\'t exchange any currency yet</string>
+    <string name="text_no_transaction_fit_filter">There are no transactions fitted the given filter</string>
+    <string name="text_select_period">Select period</string>
+    <string name="text_used_currencies">Used currencies:</string>
+    <string name="text_first_currency_selection">First currency selection:</string>
+    <string name="text_second_currency_selection">Second currency selection:</string>
+
+    <string name="dialog_text">Do you want to exchange  %s %s to %s %s ?</string>
+    <string name="dialog_yes">Yes</string>
+    <string name="dialog_no">No</string>
+
+    <string name="menu_filter">Filter</string>
+    <string name="menu_done">Done</string>
+
+    <string name="error_no_data">No data</string>
+    <string name="error_no_value">Enter the currency amount</string>
+    <string name="error_connection_failure">Connection failure</string>
+    <string name="error_network_connection">No Internet connection. Make sure Wi-Fi or
+    cellular data is turned on, then try again.</string>
+
+</resources>

@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <LinearLayout
+        android:id="@+id/root"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:visibility="gone">
+
+        <TextView
+            android:id="@+id/currency"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="6dp"
+            android:text="@string/text_first_currency_selection"
+            android:textColor="@android:color/black"
+            android:textSize="22sp" />
+
+        <include layout="@layout/divider" />
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/firstRecyclerView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layoutManager="LinearLayoutManager"
+            tools:listitem="@layout/simple_currency_item" />
+
+        <include layout="@layout/divider" />
+
+        <TextView
+            android:id="@+id/secondCurrency"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="6dp"
+            android:text="@string/text_second_currency_selection"
+            android:textColor="@android:color/black"
+            android:textSize="22sp" />
+
+        <include layout="@layout/divider" />
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/secondRecyclerView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layoutManager="LinearLayoutManager"
+            tools:listitem="@layout/simple_currency_item" />
+
+        <include layout="@layout/divider" />
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1">
+
+            <org.eazegraph.lib.charts.ValueLineChart
+                android:id="@+id/chart"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:visibility="visible"
+                app:egCurveSmoothness="0"
+                app:egScalingFactor="0.99"
+                app:egIndicatorLineColor="@color/colorPrimaryDark"
+                app:egIndicatorTextColor="@color/colorPrimaryDark"
+                app:egLegendHeight="40dp"
+                app:egShowStandardValue="true"
+                app:egShowLegendBeneathIndicator="true"
+                app:egShowDecimal="true"
+                app:egUseDynamicScaling="true"
+                app:egUseCubic="true"
+                app:egUseOverlapFill="true" />
+
+            <ProgressBar
+                android:id="@+id/progressBar"
+                style="?android:attr/progressBarStyle"
+                android:layout_gravity="center"
+                android:visibility="gone"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+            <TextView
+                android:id="@+id/error"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:visibility="gone"
+                android:layout_gravity="center"
+                android:text="@string/error_no_data"
+                android:textColor="@android:color/black"
+                android:textSize="22sp" />
+
+        </FrameLayout>
+
+        <Spinner
+            android:id="@+id/spinner"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_weight="0"
+            android:background="@color/buttonColor"
+            android:entries="@array/period_array"
+            android:padding="6dp"
+            android:prompt="@string/text_select_period"
+            android:spinnerMode="dialog"
+            android:textAlignment="center"
+            android:textSize="22sp" />
+
+    </LinearLayout>
+
+</layout>

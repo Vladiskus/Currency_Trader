@@ -1,0 +1,36 @@
+<resources>
+    <string name="app_name">Обмен валюты</string>
+
+    <string name="title_exchange">Обмен валюты</string>
+    <string name="title_selection">Выбор валюты</string>
+    <string name="title_filter">Настройка фильтра</string>
+    <string name="title_history">История</string>
+    <string name="title_analytics">Аналитика</string>
+
+    <string name="button_try_again">Обновить</string>
+    <string name="button_exchange">Обменять</string>
+    <string name="button_accept">Принять</string>
+
+    <string name="text_from">Сумма обмена</string>
+    <string name="text_to">Вы получите</string>
+    <string name="text_no_used_currency">Вы ещё ни разу не произвели обмен</string>
+    <string name="text_no_transaction_fit_filter">Ни одна операция ни удовлетворяет выбранному фильтру</string>
+    <string name="text_select_period">Выберите период</string>
+    <string name="text_used_currencies">Использованные валюты:</string>
+    <string name="text_first_currency_selection">Выберите первую валюту:</string>
+    <string name="text_second_currency_selection">Выберите вторую валюту:</string>
+
+    <string name="dialog_text">Вы хотите обменять \n%s %s to %s %s ?</string>
+    <string name="dialog_yes">Да</string>
+    <string name="dialog_no">Нет</string>
+
+    <string name="menu_filter">Фильтр</string>
+    <string name="menu_done">Принять</string>
+
+    <string name="error_no_data">Нет данных</string>
+    <string name="error_no_value">Введите количество валюты</string>
+    <string name="error_connection_failure">Ошибка соединения с сервером</string>
+    <string name="error_network_connection">Не удалось подключиться к интернету. Убедитесь,что Wi-Fi или
+    мобильный интернет включены и попробуйте снова.</string>
+
+</resources>
