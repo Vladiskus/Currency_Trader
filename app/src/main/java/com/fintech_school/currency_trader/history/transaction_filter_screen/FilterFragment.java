@@ -15,6 +15,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 
 import com.borax12.materialdaterangepicker.date.DatePickerDialog;
+import com.fintech_school.currency_trader.main.MyApp;
 import com.fintech_school.currency_trader.R;
 import com.fintech_school.currency_trader.data.Filter;
 import com.fintech_school.currency_trader.databinding.FragmentFilterBinding;
@@ -34,6 +35,7 @@ public class FilterFragment extends BaseFragment {
     private UsedCurrencyAdapter usedCurrencyAdapter;
     private ArrayAdapter<String> spinnerAdapter4;
     private ArrayAdapter<String> spinnerAdapter5;
+    private String subtitle;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -46,9 +48,18 @@ public class FilterFragment extends BaseFragment {
                              Bundle savedInstanceState) {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_filter, container, false);
         viewModel = ViewModelProviders.of(this).get(FilterViewModel.class);
-        getActionBar().setTitle(R.string.title_filter);
         initSpinnerAdapters();
         return binding.getRoot();
+    }
+
+    @Override
+    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+        getActionBar().setTitle(R.string.title_filter);
+        if (subtitle != null) getActionBar().setSubtitle(subtitle);
+        getActionBar().setDisplayHomeAsUpEnabled(!((MyApp) getActivity().getApplication())
+                .isBottomNavigationSelected());
+        getActionBar().setHomeAsUpIndicator(R.drawable.ic_menu_white_24dp);
     }
 
     private void initSpinnerAdapters() {
@@ -72,7 +83,8 @@ public class FilterFragment extends BaseFragment {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 if (position == 3) {
-                    if (!viewModel.getFilter().toString(getContext()).contains("-"))
+                    if (!viewModel.getFilter()
+                            .toString(getResources().getStringArray(R.array.filter_array_4)).contains("-"))
                         showDatePicker();
                     else changeSpinnerAdapter(spinnerAdapter5);
 
@@ -129,8 +141,10 @@ public class FilterFragment extends BaseFragment {
             binding.title.checkBox.jumpDrawablesToCurrentState();
             if (usedCurrencyAdapter != null) usedCurrencyAdapter.notifyDataSetChanged();
         }));
-        disposables.add(viewModel.getPeriodSelectedSource().subscribe(period ->
-                getActionBar().setSubtitle(period)));
+        disposables.add(viewModel.getPeriodSelectedSource().subscribe(period -> {
+            if (getActionBar() != null) getActionBar().setSubtitle(period);
+            subtitle = period;
+        }));
         disposables.add(viewModel.getUsedCurrenciesSource()
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
@@ -176,7 +190,9 @@ public class FilterFragment extends BaseFragment {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        if (item.getItemId() == R.id.done) viewModel.onDoneClick();
-        return super.onOptionsItemSelected(item);
+        if (item.getItemId() == R.id.done) {
+            viewModel.onDoneClick();
+            return true;
+        } else return super.onOptionsItemSelected(item);
     }
 }

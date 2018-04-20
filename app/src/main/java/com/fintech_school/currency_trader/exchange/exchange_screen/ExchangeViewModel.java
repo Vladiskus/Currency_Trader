@@ -64,7 +64,7 @@ public class ExchangeViewModel extends BaseViewModel {
             @Override
             public void set(Double value) {
                 value = roundValue(value);
-                if (baseAmount.get() != null && Math.abs(baseAmount.get() - value) < 0.2) return;
+                if (baseAmount.get() != null && Math.abs(baseAmount.get() - value) < 0.4) return;
                 super.set(value);
                 targetAmount.set(value / baseCurrency.get().getValue() * targetCurrency.get().getValue());
             }
@@ -73,7 +73,7 @@ public class ExchangeViewModel extends BaseViewModel {
             @Override
             public void set(Double value) {
                 value = roundValue(value);
-                if (targetAmount.get() != null && Math.abs(targetAmount.get() - value) < 0.2) return;
+                if (targetAmount.get() != null && Math.abs(targetAmount.get() - value) < 0.4) return;
                 super.set(value);
                 baseAmount.set(value / targetCurrency.get().getValue() * baseCurrency.get().getValue());
             }

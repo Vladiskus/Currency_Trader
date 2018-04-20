@@ -8,6 +8,7 @@ import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 
+import com.fintech_school.currency_trader.main.MyApp;
 import com.fintech_school.currency_trader.R;
 import com.fintech_school.currency_trader.main.FragmentListener;
 
@@ -24,8 +25,13 @@ public abstract class BaseFragment extends Fragment {
         super.onAttach(context);
         if (context instanceof FragmentListener) fragmentListener = (FragmentListener) context;
         else throw new RuntimeException(context.toString() + " must implement FragmentListener");
+    }
+
+    @Override
+    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
         actionBar = ((AppCompatActivity) getActivity()).getSupportActionBar();
-        if (actionBar == null) throw new RuntimeException(context.toString() + " must have ActionBar");
+        if (actionBar == null) throw new RuntimeException("Screen must have ActionBar");
     }
 
     @Override
@@ -49,7 +55,10 @@ public abstract class BaseFragment extends Fragment {
     protected void setDefaultActionBar(int titleId) {
         actionBar.setTitle(titleId);
         if (titleId != R.string.title_history) actionBar.setSubtitle("");
-        actionBar.setDisplayHomeAsUpEnabled(false);
+        actionBar.setDisplayHomeAsUpEnabled(!((MyApp) getActivity().getApplication())
+                .isBottomNavigationSelected());
+        actionBar.setHomeAsUpIndicator(R.drawable.ic_menu_white_24dp);
+
     }
 
     @Override

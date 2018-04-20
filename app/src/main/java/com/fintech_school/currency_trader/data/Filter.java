@@ -1,9 +1,7 @@
 package com.fintech_school.currency_trader.data;
 
-import android.content.Context;
 import android.support.annotation.NonNull;
 
-import com.fintech_school.currency_trader.R;
 import com.fintech_school.currency_trader.util.DateUtil;
 
 import java.util.ArrayList;
@@ -82,8 +80,7 @@ public class Filter {
         endDate = new Date();
     }
 
-    public String toString(Context context) {
-        String[] names = context.getResources().getStringArray(R.array.filter_array_4);
+    public String toString(String[] names) {
         if (period == null) return DateUtil.getString(startDate, "dd.MM.yyyy")
                 + " - " + DateUtil.getString(endDate, "dd.MM.yyyy");
         else switch (period) {

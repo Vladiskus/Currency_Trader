@@ -100,9 +100,9 @@ public class CurrencyRepository {
         else return new Gson().fromJson(json, Filter.class);
     }
 
-    // Загружать курсы валют по всем дням слишком долго. Но одновременная загрузка курсов всех дней
-    // черевата ошибками(объект HistoricalData иногда приходит null). Поэтому я попытался совместить оба
-    // подхода, чтобы получить наилучший результат.
+    // Загружать последовательно курсы валют по всем дням слишком долго. Но одновременная загрузка
+    // курсов всех дней черевата ошибками(объект HistoricalData иногда приходит null).
+    // Поэтому я попытался совместить оба подхода, чтобы получить наилучший результат.
     public Single<ArrayList<HistoricalData>> getHistoricalData(String currency, Date startDate, Date endDate) {
         return Single.create(emitter -> {
             ArrayList<Date> dates = DateUtil.getDateList(startDate, endDate);
@@ -130,9 +130,10 @@ public class CurrencyRepository {
                                                 downloadHistoricalData(currency, date).subscribe(() -> {
                                                 }, exception -> {
                                                     if (!emitter.isDisposed()) {
-                                                        if (data.size() > dates.size() * 4 / 5)
+                                                        if (data.size() > dates.size() * 4 / 5) {
+                                                            Collections.sort(data);
                                                             emitter.onSuccess(data);
-                                                        else emitter.onError(exception);
+                                                        } else emitter.onError(exception);
                                                     }
                                                 });
                                             } else if (!emitter.isDisposed()) emitter.onError(throwable);

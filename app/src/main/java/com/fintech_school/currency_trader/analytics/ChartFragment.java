@@ -3,6 +3,7 @@ package com.fintech_school.currency_trader.analytics;
 import android.arch.lifecycle.ViewModelProviders;
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.support.v7.widget.DividerItemDecoration;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -36,8 +37,13 @@ public class ChartFragment extends BaseFragment {
                              Bundle savedInstanceState) {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_chart, container, false);
         viewModel = ViewModelProviders.of(getActivity()).get(ChartViewModel.class);
-        setDefaultActionBar(R.string.title_analytics);
         return binding.getRoot();
+    }
+
+    @Override
+    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+        setDefaultActionBar(R.string.title_analytics);
     }
 
     @Override

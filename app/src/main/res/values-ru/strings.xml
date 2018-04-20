@@ -32,5 +32,6 @@
     <string name="error_connection_failure">Ошибка соединения с сервером</string>
     <string name="error_network_connection">Не удалось подключиться к интернету. Убедитесь,что Wi-Fi или
     мобильный интернет включены и попробуйте снова.</string>
+    <string name="title_developer_options">Настройки разработчиков</string>
 
 </resources>

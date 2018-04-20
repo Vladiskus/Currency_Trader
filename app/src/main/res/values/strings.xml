@@ -6,6 +6,7 @@
     <string name="title_filter">Filter selection</string>
     <string name="title_history">History</string>
     <string name="title_analytics">Analytics</string>
+    <string name="title_developer_options">Developer options</string>
 
     <string name="button_try_again">Try again</string>
     <string name="button_exchange">Exchange</string>
@@ -19,6 +20,9 @@
     <string name="text_used_currencies">Used currencies:</string>
     <string name="text_first_currency_selection">First currency selection:</string>
     <string name="text_second_currency_selection">Second currency selection:</string>
+    <string name="text_navigation" translatable="false">Navigation:</string>
+    <string name="text_navigation_drawer" translatable="false">Drawer navigation</string>
+    <string name="text_navigation_bottom" translatable="false">Bottom navigation</string>
 
     <string name="dialog_text">Do you want to exchange  %s %s to %s %s ?</string>
     <string name="dialog_yes">Yes</string>

@@ -4,6 +4,7 @@ import android.app.Application;
 import android.support.annotation.NonNull;
 import android.util.Pair;
 
+import com.fintech_school.currency_trader.R;
 import com.fintech_school.currency_trader.data.Transaction;
 import com.fintech_school.currency_trader.parents.BaseViewModel;
 import com.fintech_school.currency_trader.data.Filter;
@@ -49,7 +50,8 @@ public class FilterViewModel extends BaseViewModel implements OnUsedCurrencyClic
                     if (filter.getSelectedCurrencies() == null)
                         filter.setSelectedCurrencies(new ArrayList<>(usedCurrencies));
                     else if (filter.getSelectedCurrencies().size() == 0) selectionDroppedEmitter.onNext(false);
-                    periodSelectedEmitter.onNext(filter.toString(getApplication().getApplicationContext()));
+                    periodSelectedEmitter.onNext(filter.toString(getApplication().getResources()
+                            .getStringArray(R.array.filter_array_4)));
                     loadingStateEmitter.onNext(false);
                     return usedCurrencies;
                 }));
@@ -83,14 +85,16 @@ public class FilterViewModel extends BaseViewModel implements OnUsedCurrencyClic
         if (position == 0) filter.setSimpleDate(Filter.Period.ALL_TIME);
         else if (position == 1) filter.setSimpleDate(Filter.Period.LAST_WEEK);
         else filter.setSimpleDate(Filter.Period.LAST_MONTH);
-        periodSelectedEmitter.onNext(filter.toString(getApplication().getApplicationContext()));
+        periodSelectedEmitter.onNext(filter.toString(getApplication().getResources()
+                .getStringArray(R.array.filter_array_4)));
     }
 
     public void onComplexFilterSelected(Date startDate, Date endDate) {
         Pair<Date, Date> pair = DateUtil.getMaxRange(startDate, endDate);
         filter.setComplexDate(pair.first, pair.second);
         filter.setPeriod(null);
-        periodSelectedEmitter.onNext(filter.toString(getApplication().getApplicationContext()));
+        periodSelectedEmitter.onNext(filter.toString(getApplication().getResources()
+                .getStringArray(R.array.filter_array_4)));
     }
 
     public void onMainCheckedChange(boolean isChecked) {

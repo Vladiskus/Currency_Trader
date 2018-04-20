@@ -15,25 +15,43 @@ public class MainViewModel extends BaseViewModel {
         CURRENCY_LIST_FRAGMENT,
         HISTORY_FRAGMENT,
         ANALYTICS_FRAGMENT,
+        DEVELOPER_OPTIONS_FRAGMENT,
         BACK
     }
 
     private DestinationFragment currentFragment;
     private ObservableEmitter<DestinationFragment> navigationEmitter;
+    private ObservableEmitter<Boolean> navigationDrawerStateEmitter;
+    private ObservableEmitter<Boolean> navigationTypeEmitter;
 
     public MainViewModel(@NonNull Application application) {
         super(application);
     }
 
-    public Observable<DestinationFragment> getNavigationTriggerSource(boolean isFirstStart) {
+    public Observable<DestinationFragment> getNavigationTriggerSource() {
         return Observable.create(emitter -> {
             navigationEmitter = emitter;
-            if (isFirstStart) navigationEmitter.onNext(DestinationFragment.CURRENCY_LIST_FRAGMENT);
+            if (currentFragment == null) navigationEmitter.onNext(DestinationFragment.CURRENCY_LIST_FRAGMENT);
+        });
+    }
+
+    public Observable<Boolean> getNavigationDrawerState() {
+        return Observable.create(emitter -> navigationDrawerStateEmitter = emitter);
+    }
+
+    public Observable<Boolean> getNavigationTypeSource() {
+        return Observable.create(emitter -> {
+            navigationTypeEmitter = emitter;
+            navigationTypeEmitter.onNext(isBottomNavigationSelected());
         });
     }
 
     public DestinationFragment getCurrentFragment() {
         return currentFragment;
+    }
+
+    public boolean isBottomNavigationSelected() {
+        return ((MyApp) getApplication()).isBottomNavigationSelected();
     }
 
     public void setCurrentFragment(DestinationFragment currentFragment) {
@@ -55,7 +73,20 @@ public class MainViewModel extends BaseViewModel {
         return false;
     }
 
-    public void onNavigationUp() {
+    public void onHomeClick(boolean isDrawerOpen) {
+        navigationDrawerStateEmitter.onNext(!isDrawerOpen);
+    }
+
+    public void onDeveloperOptionsClick() {
+        navigationEmitter.onNext(DestinationFragment.DEVELOPER_OPTIONS_FRAGMENT);
+    }
+
+    public void onNavigationBackClick() {
         navigationEmitter.onNext(DestinationFragment.BACK);
+    }
+
+    public void onNavigationTypeChanged(boolean isBottomNavigationSelected) {
+        ((MyApp) getApplication()).setBottomNavigationSelected(isBottomNavigationSelected);
+        navigationTypeEmitter.onNext(isBottomNavigationSelected);
     }
 }

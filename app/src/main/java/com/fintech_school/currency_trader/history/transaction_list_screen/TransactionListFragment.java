@@ -28,6 +28,7 @@ public class TransactionListFragment extends BaseFragment {
     private FragmentTransactionListBinding binding;
     private TransactionListViewModel viewModel;
     private TransactionAdapter transactionAdapter;
+    private String subtitle;
     private boolean hasContent;
 
     @Override
@@ -40,9 +41,15 @@ public class TransactionListFragment extends BaseFragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_transaction_list, container, false);
         viewModel = ViewModelProviders.of(getActivity()).get(TransactionListViewModel.class);
-        setDefaultActionBar(R.string.title_history);
         initAdapter();
         return binding.getRoot();
+    }
+
+    @Override
+    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+        setDefaultActionBar(R.string.title_history);
+        if (subtitle != null) getActionBar().setSubtitle(subtitle);
     }
 
     private void initAdapter() {
@@ -68,8 +75,10 @@ public class TransactionListFragment extends BaseFragment {
     protected void subscribe(CompositeDisposable disposables) {
         disposables.add(viewModel.getLoadingStateSource().subscribe(isLoading ->
                 getFragmentListener().showProgress(isLoading)));
-        disposables.add(viewModel.getFilterNameSource().subscribe(filterName ->
-                getActionBar().setSubtitle(filterName)));
+        disposables.add(viewModel.getFilterNameSource().subscribe(filterName -> {
+            if (getActionBar() != null) getActionBar().setSubtitle(filterName);
+            subtitle = filterName;
+        }));
         disposables.add(viewModel.getNavigationTriggerSource().subscribe(object ->
                 getFragmentListener().getNavigationController().navigateToFilterFragment()));
         disposables.add(viewModel.getTransactionsSource()
@@ -99,7 +108,9 @@ public class TransactionListFragment extends BaseFragment {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        if (item.getItemId() == R.id.filter) viewModel.onFilterClick();
-        return super.onOptionsItemSelected(item);
+        if (item.getItemId() == R.id.filter) {
+            viewModel.onFilterClick();
+            return true;
+        } else return super.onOptionsItemSelected(item);
     }
 }

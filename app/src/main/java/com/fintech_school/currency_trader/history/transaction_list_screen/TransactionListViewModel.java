@@ -3,6 +3,7 @@ package com.fintech_school.currency_trader.history.transaction_list_screen;
 import android.app.Application;
 import android.support.annotation.NonNull;
 
+import com.fintech_school.currency_trader.R;
 import com.fintech_school.currency_trader.data.Transaction;
 import com.fintech_school.currency_trader.parents.BaseViewModel;
 import com.fintech_school.currency_trader.data.Filter;
@@ -29,7 +30,8 @@ public class TransactionListViewModel extends BaseViewModel {
 
     public Flowable<ArrayList<Transaction>> getTransactionsSource() {
         filter = getCurrencyRepository().loadFilter();
-        filterNameEmitter.onNext(filter.toString(getApplication().getApplicationContext()));
+        filterNameEmitter.onNext(filter.toString(getApplication().getResources()
+                .getStringArray(R.array.filter_array_4)));
         Flowable<ArrayList<Transaction>> source = getCurrencyRepository().getTransactions()
                 .observeOn(AndroidSchedulers.mainThread()).map((transactions -> {
                     this.transactions = (ArrayList<Transaction>) transactions;

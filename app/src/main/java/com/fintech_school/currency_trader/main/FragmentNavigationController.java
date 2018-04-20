@@ -50,5 +50,10 @@ public class FragmentNavigationController {
     public void navigateToAnalyticsFragment() {
         fragmentManager.beginTransaction().replace(containerId, new ChartFragment()).commit();
     }
+
+    public void navigateToDeveloperOptionsFragment() {
+        fragmentManager.beginTransaction().replace(containerId, new DeveloperOptionsFragment())
+                .addToBackStack(null).commit();
+    }
 }
 

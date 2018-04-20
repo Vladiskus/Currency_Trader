@@ -4,7 +4,7 @@ import android.app.Application;
 import android.arch.lifecycle.AndroidViewModel;
 import android.support.annotation.NonNull;
 
-import com.fintech_school.currency_trader.dependency_injection.MyApp;
+import com.fintech_school.currency_trader.main.MyApp;
 import com.fintech_school.currency_trader.repo.CurrencyRepository;
 
 import javax.inject.Inject;

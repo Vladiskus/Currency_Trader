@@ -1,6 +1,14 @@
 apply plugin: 'com.android.application'
 
 android {
+    signingConfigs {
+        config {
+            keyAlias 'school'
+            keyPassword '123456'
+            storeFile file('C:/Users/Vlad/OneDrive/Documents/important/key_school.jks')
+            storePassword '123456'
+        }
+    }
     compileSdkVersion 26
     defaultConfig {
         applicationId "com.fintech_school.currency_trader"
@@ -18,6 +26,7 @@ android {
         release {
             minifyEnabled true
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            signingConfig signingConfigs.config
         }
     }
     compileOptions {
@@ -27,7 +36,7 @@ android {
 }
 
 dependencies {
-    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation fileTree(include: ['*.jar'], dir: 'libs')
     implementation 'com.android.support:appcompat-v7:26.1.0'
     implementation 'com.android.support:design:26.1.0'
     implementation 'com.android.support.constraint:constraint-layout:1.0.2'
@@ -37,12 +46,12 @@ dependencies {
     implementation 'com.nineoldandroids:library:2.4.0'
     implementation 'com.squareup.retrofit2:retrofit:2.3.0'
     implementation 'com.squareup.retrofit2:converter-gson:2.3.0'
-    implementation "android.arch.lifecycle:extensions:1.1.0"
-    implementation "android.arch.persistence.room:runtime:1.0.0"
-    implementation "android.arch.persistence.room:rxjava2:1.0.0"
+    implementation 'android.arch.lifecycle:extensions:1.1.0'
+    implementation 'android.arch.persistence.room:runtime:1.0.0'
+    implementation 'android.arch.persistence.room:rxjava2:1.0.0'
     implementation 'com.google.dagger:dagger-android:2.11'
     implementation 'com.google.dagger:dagger-android-support:2.11'
-    implementation "io.reactivex.rxjava2:rxjava:2.1.9"
+    implementation 'io.reactivex.rxjava2:rxjava:2.1.9'
     implementation 'io.reactivex.rxjava2:rxandroid:2.0.2'
     implementation 'com.android.support:recyclerview-v7:26.1.0'
     implementation 'com.borax12.materialdaterangepicker:library:1.9'
